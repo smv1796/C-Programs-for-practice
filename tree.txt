@@ -1,0 +1,31 @@
+ void dfs1(TreeNode* root, int& smallest1)
+    {
+        if(!root) return;
+        
+        if(smallest1>root->val)
+            smallest1=root->val;
+        
+        dfs1(root->left,smallest1);
+        dfs1(root->right,smallest1)
+    }
+    
+    void dfs2(TreeNode* root, int& smallest2, int& smallest1)
+    {
+        if(!root) return;
+        
+        if(root->val!=smallest1 && smallest2>root->val)
+            smallest2=root->val;
+        
+        dfs2(root->left,smallest2);
+        dfs2(root->right,smallest2);
+    }
+    int findSecondMinimumValue(TreeNode* root) {
+        
+        int smallest1=INT_MAX;
+        dfs1(root,smallest1);
+        
+        int smallest2=INT_MAX;
+        dfs2(root,smallest2,smallest1);
+        
+        return smallest2;
+        
